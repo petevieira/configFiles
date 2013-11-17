@@ -1,0 +1,46 @@
+;; Emacs configuration file
+
+;; AUTHOR: Pete Vieira
+
+(setq inhibit-startup-message t)	;don't show splash page
+
+;;;;;;;;;;;;;;;;
+;; appearance ;;
+;;;;;;;;;;;;;;;;
+
+(setq frame-title-format (concat invocation-name "@" system-name ": %b"))
+
+;; use dark background
+(add-to-list 'default-frame-alist '(background-mode . dark))
+
+;; unclutter gui
+(tool-bar-mode -1)			;no toolbar
+(set-scroll-bar-mode nil)		;no scoll bars
+
+;;;;;;;;;;;;
+;;  FONT  ;;
+;;;;;;;;;;;;
+
+(set-face-background 'region               "#555555")
+(set-face-foreground 'modeline             "white")
+(set-face-background 'modeline             "333333")
+
+(set-face-background 'default              "black")
+(set-face-foreground 'default              "green")
+
+(add-to-list 'default-frame-alist '(background-mode . dark))
+
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
+
+
+;;;;;;;;;;;;;;;;;;;
+;; Auto-Complete ;;
+;;;;;;;;;;;;;;;;;;;
+;; http://cx4a.org/software/auto-complete/manual.html#Installation
+;; make install DIR=$HOME/.emacs.d/
+
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
