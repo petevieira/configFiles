@@ -2,58 +2,51 @@
 
 ;; AUTHOR: Pete Vieira
 
-(setq inhibit-startup-message t)	;don't show splash page
+;;;;;;;;;;;;;;
+;; packages ;;
+;;;;;;;;;;;;;;
+
+;; Marmalade package manager for emacs
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
 ;;;;;;;;;;;;;;;;
 
+(custom-set-variables
+'(initial-frame-alist (quote ((fullscreen . maximized)))))
+
 (setq frame-title-format (concat invocation-name "@" system-name ": %b"))
 
-;; use dark background
-(add-to-list 'default-frame-alist '(background-mode . dark))
-
 ;; unclutter gui
-;(tool-bar-mode -1)			;no toolbar
+(tool-bar-mode -1)			;no toolbar
 (set-scroll-bar-mode nil)		;no scoll bars
+(setq inhibit-startup-message t)	;don't show splash page
+
+
+;; Solarized color theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
+(load-theme 'solarized-dark t)
 
 ;;;;;;;;;;;;
 ;;  FONT  ;;
 ;;;;;;;;;;;;
 
-(set-face-background 'region               "#555555")
-(set-face-foreground 'modeline             "white")
-(set-face-background 'modeline             "#333333")
-
-(set-face-foreground 'default              "green")
-
-
-(add-to-list 'default-frame-alist '(background-mode . dark))
-
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 
-(set-face-background 'default              "#002b36") ; background dark blue
-(set-face-attribute 'default nil :family "Menlo" :height 120)
-(set-face-attribute 'font-lock-comment-face nil :foreground "#657b83") ; cyan
-(set-face-attribute 'font-lock-string-face nil :foreground "#00afaf")
-(set-face-attribute 'font-lock-constant-face nil :foreground "#4f004f")
-(set-face-attribute 'font-lock-keyword-face nil :foreground "#00003f")
-(set-face-attribute 'font-lock-builtin-face nil :foreground "#00003f")
-(set-face-attribute 'font-lock-type-face nil :foreground "#000000")
+;;;;;;;;;;;;;;;;;;;
+;; Auto-Complete ;;
+;;;;;;;;;;;;;;;;;;;
 
-;base02    #073642 ;dark cyan background
-;base01    #586e75 ;light cyan
-;base00    #657b83 ;dark grey
-;base0     #839496 ;light gray
-;base1     #93a1a1 ;light gray
-;base2     #eee8d5 ;very light purple
-;base3     #fdf6e3 ;very light pink
-;yellow    #b58900
-;orange    #cb4b16
-;red       #dc322f
-;magenta   #d33682
-;violet    #6c71c4
-;blue      #268bd2
-;cyan      #2aa198
-;green     #859900
+;; http://cx4a.org/software/auto-complete/manual.html#Installation
+;; make install DIR=$HOME/.emacs.d/
+
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
