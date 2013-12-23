@@ -24,7 +24,8 @@ Print()
 GetDependencies()
 {
     declare -a DEPENDENCIES=("texlive"
-			     "auctex")
+			     "auctex"
+			     "rosemacs-el")
 
     for (( i=0; i < ${#DEPENDENCIES[@]}; ++i ))
 	do
