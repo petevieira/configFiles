@@ -61,12 +61,12 @@
 ;;;;;;;;;;;;;;;
 
 ;; Load the library and start it up
-(require 'rosemacs)
-(invoke-rosemacs)
+;;(require 'rosemacs)
+;;(invoke-rosemacs)
 
 ;; Optional but highly recommended: add a prefix for quick access
 ;; to the rosemacs commands
-(global-set-key "\C-x\C-r" ros-keymap)
+;;(global-set-key "\C-x\C-r" ros-keymap)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CUSTOM KEY-BINDINGS ;;
@@ -76,7 +76,8 @@
 (setq tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
-(custom-set-faces
+(set-face-attribute 'default nil :height 105)
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
