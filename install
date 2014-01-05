@@ -32,7 +32,7 @@ GetDependencies()
 	    which ${DEPENDENCIES[$i]}
 	    if [ $? != 0 ]; then
 		echo -e "${CYAN}Installing ${YELLOW}${DEPENDENCIES[$i]} ${CYAN}...${WHITE}"
-		sudo apt-get install ${DEPENDENCIES[$i]}
+		sudo apt-get install -y ${DEPENDENCIES[$i]}
 	    fi
     done
 }
