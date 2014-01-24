@@ -130,7 +130,7 @@
 (setq ecb-source-path (quote "~/myRepos/")) ; default path
 
 ;;;;;;;;;;;;;;;
-;; Ros-EMACS ;;
+;; ROS-EMACS ;;
 ;;;;;;;;;;;;;;;
 
 ;; Load the library and start it up
