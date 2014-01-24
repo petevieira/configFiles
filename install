@@ -12,6 +12,10 @@ declare -r GREEN='\E[32m'
 declare -r RED='\E[31m'
 declare -r MAGENTA='\E[35m'
 
+declare -r REPOS=(  #Account        #Repo                #Branch
+                    "alexott"        "ecb"              "master"
+                 )
+
 Print()
 {
     echo "FILES: "
@@ -21,11 +25,65 @@ Print()
     echo "$HOME_FILES"
 }
 
+GetECB()
+{
+    declare -l start_repo=0
+    declare -l end_repo=${#REPOS[@]}-2
+
+    echo -e "${RED}\nCLONING REQUIRED REPOSITORIES${WHITE}"
+    cd ~/.emacs.d/ # Go to .emacs.d directory
+    for (( i=${start_repo}; i < $[${end_repo}]; i++ ))
+        do
+            local skip=false;
+            local repo_dir=${REPOS[$i+1]}
+            local desired_branch=${REPOS[$i+2]}
+            # if repo exists update it
+            if [ -d $repo_dir ]; then
+                # Get current branch and cd back to src directory
+                local current_branch=`cd $repo_dir && git branch | sed -n '/\* /s///p' && cd ..`
+                if [ "$current_branch" == $desired_branch ]; then
+                    echo "Do you want to update current branch of $repo_dir? (y/n)"
+                else
+                    echo "Do you want to checkout $desired_branch branch of $repo_dir and update it? (y/n)"
+                fi
+                # Get a reply from the user
+                while read -r -s -n 1 reply; do
+                    if [[ $reply = [nN] ]]; then
+                        skip=true
+                        break
+                    elif [[ $reply = [yY] ]]; then
+                        break
+                    else
+                        echo -e "Please enter either \"y\" or \"n\"."
+                    fi
+                done
+                # If not skipping this repo, switch to correct branch if not on it and update it
+                if [ $skip != "true" ]; then
+                    cd $repo_dir
+                    if [ "$current_branch" != "$desired_branch" ]; then
+                        echo -e "${BLUE}CHECKING OUT ${YELLOW}$desired_branch ${BLUE}BRANCH OF ${YELLOW}$repo_dir${WHITE}"
+                        git checkout $desired_branch
+                    fi
+                    echo -e "${BLUE}UPDATING ${YELLOW}$desired_branch ${BLUE}BRANCH OF ${YELLOW}$repo_dir${WHITE}"
+                    git pull origin $desired_branch
+                    cd .. # cd back up into src of catkin workspace
+                fi
+            else # clone the repo
+                echo -e "${BLUE}Cloning ${YELLOW}$desired_branch ${BLUE}BRANCH OF ${YELLOW}$repo_dir${WHITE}"
+                local link="${REPOS[$i]}/${REPOS[$i+1]}"
+                git clone -b $desired_branch https://github.com/$link
+            fi
+            echo
+            i=$[i+2]
+    done
+    echo -e "${GREEN}FINISHED INSTALLING REPOSITORIES${WHITE}\n"
+}
+
 GetDependencies()
 {
     declare -a DEPENDENCIES=("texlive"
-			     "auctex"
-			     "rosemacs-el")
+        "python-mode"
+		"rosemacs-el")
 
     for (( i=0; i < ${#DEPENDENCIES[@]}; ++i ))
 	do
@@ -35,6 +93,8 @@ GetDependencies()
 		sudo apt-get install -y ${DEPENDENCIES[$i]}
 	    fi
     done
+
+    GetECB
 }
 
 Install()
