@@ -1,0 +1,4 @@
+[
+	{"keys": ["ctrl+alt+v"], "command": "move", "args": {"by": "pages", "forward": false }},
+	{"keys": ["ctrl+alt+o"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "hh", "ipp", "inl", "m", "mm"]}}
+]
