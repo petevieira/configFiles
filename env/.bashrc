@@ -130,7 +130,8 @@ catkin_make()
   return ${PIPESTATUS[0]}
 }
 
-source /opt/ros/groovy/setup.bash
-source ~/catkin_ws/devel/setup.bash
+#source /opt/ros/groovy/setup.bash
+#source ~/catkin_ws/devel/setup.bash
 
-export PS1='\[\033[01;32m\]\u@\h\[\033[01;31m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[01;32m\]\$\[\033[00m\] '
+# terminal prompt = username@computer_name (git_branch) \n $
+export PS1='\[\033[01;32m\]\u@\h\[\033[01;31m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[01;32m\]\n\$\[\033[00m\] '
