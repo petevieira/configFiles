@@ -7,6 +7,7 @@
 	"translate_tabs_to_spaces": true,
 	"ignored_packages":
 	[
-		"Vintage",
-	]
+		"Vintage"
+	],
+	"preview_on_click": false
 }
