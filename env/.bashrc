@@ -85,6 +85,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias dl='gvfs-trash'
+alias vlgd='valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -106,19 +108,20 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/:/usr/local/lib/x86_64-linux-gnu/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/etherlab/lib/
+SHELL=/bin/bash
 
-
-make()
-{
-  pathpat="(/[^/]*)+:[0-9]+"
-  ccred=$(echo -e "\033[0;31m")
-  ccyellow=$(echo -e "\033[0;33m")
-  ccend=$(echo -e "\033[0m")
-  /usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
-  return ${PIPESTATUS[0]}
-}
+#make()
+#{
+#  pathpat="(/[^/]*)+:[0-9]+"
+#  ccred=$(echo -e "\033[0;31m")
+#  ccyellow=$(echo -e "\033[0;33m")
+#  ccend=$(echo -e "\033[0m")
+ # /usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+#  return ${PIPESTATUS[0]}
+#}
 
 catkin_make()
 {
@@ -130,8 +133,9 @@ catkin_make()
   return ${PIPESTATUS[0]}
 }
 
+
 #source /opt/ros/groovy/setup.bash
 #source ~/catkin_ws/devel/setup.bash
+SESSION_MANAGER=/bin/bash
 
-# terminal prompt = username@computer_name (git_branch) \n $
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;31m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[01;32m\]\n\$\[\033[00m\] '
