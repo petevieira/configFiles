@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+alias make='colormake'
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -113,29 +115,29 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/etherlab/lib/
 SHELL=/bin/bash
 
-#make()
-#{
-#  pathpat="(/[^/]*)+:[0-9]+"
-#  ccred=$(echo -e "\033[0;31m")
-#  ccyellow=$(echo -e "\033[0;33m")
-#  ccend=$(echo -e "\033[0m")
- # /usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
-#  return ${PIPESTATUS[0]}
-#}
+# make()
+# {
+#   pathpat="(/[^/]*)+:[0-9]+"
+#   ccred=$(echo -e "\033[0;31m")
+#   ccyellow=$(echo -e "\033[0;33m")
+#   ccend=$(echo -e "\033[0m")
+#   /usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+#   return ${PIPESTATUS[0]}
+# }
 
-catkin_make()
-{
-  pathpat="(/[^/]*)+:[0-9]+"
-  ccred=$(echo -e "\033[0;31m")
-  ccyellow=$(echo -e "\033[0;33m")
-  ccend=$(echo -e "\033[0m")
-  /opt/ros/groovy/bin/catkin_make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
-  return ${PIPESTATUS[0]}
-}
-
+# catkin_make()
+# {
+#   pathpat="(/[^/]*)+:[0-9]+"
+#   ccred=$(echo -e "\033[0;31m")
+#   ccyellow=$(echo -e "\033[0;33m")
+#   ccend=$(echo -e "\033[0m")
+#   /opt/ros/groovy/bin/catkin_make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+#   return ${PIPESTATUS[0]}
+# }
 
 #source /opt/ros/groovy/setup.bash
 #source ~/catkin_ws/devel/setup.bash
 SESSION_MANAGER=/bin/bash
 
+# terminal prompt = username@computer_name (git_branch) \n $
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;31m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[01;32m\]\n\$\[\033[00m\] '
