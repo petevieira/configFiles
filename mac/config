@@ -1,0 +1,11 @@
+# personal github
+Host github.com-petevieira
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/github-petevieira
+
+# tlc github
+Host github.com-petevieiratlc
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/github-petevieiratlc
